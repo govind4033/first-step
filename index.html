@@ -4,53 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>reaction time</title>
+    <script src="js/jquery-3.7.1.min.js"></script>
     <style>
-        #shape {
-            width: 200px;
-            height: 200px;
-            background-color: red;
-            position: relative;
-        }
+        body{
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 130%;
+}
+#box{
+  width: 550px;  
+  margin: 0 auto;
+}
+label{
+    width: 200px;
+    float: left;
+    position: relative;
+    top: 12px;
+
+}
+input{
+    width: 320px;
+    font-size: 25px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px 5px 12px 5px;
+}
+.framework{
+    margin-bottom: 10px;
+}
+#submitbtn{
+    width: 130px;
+    margin-left: 200px;
+}
+.errors{
+    color: red;
+    font-size: 90%;
+}
+.success{
+    color: green;
+    font-size: 90%;
+}
     </style>
 </head>
 <body>
-    <h1>Reaction twister</h1>
-    <p>click on the box as soon as you can</p>
-    <div id="shape"></div>
+    <div class="errors"></div>
+    <div class="success"></div>
+    <div id="box">
+        <div class="framework">
+            <label for="Email">Email</label>
+            <input type="text" id="Email" name="Email">
+        </div>
+        <div class="framework">
+            <label for="email">Phone number</label>
+            <input type="text" id="Phoneno" name="Phone number">
+        </div>
+        <div class="framework">
+            <label for="email">password</label>
+            <input type="text" id="password" name="password">
+        </div>
+        <div class="framework">
+            <label for="email">Confirm password</label>
+            <input type="text" id="Confirmpassword" name="Confirm password">
+        </div>
+        <input type="submit" id="submitbtn">
+    </div>
     <script>
-        var start = new Date().getTime();
-        function getRandomColor() {
-           var letters = '0123456789ABCDEF';
-           var color = '#';
-           for (var i = 0; i < 6; i++) {
-              color += letters[Math.floor(Math.random() * 16)];
-           }
-          return color;
+        var errorm = "";
+        var empty = "";
+        function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
         }
-        function move(){
-            var left ;
-            var top ;
-            var wh ;
-            left = Math.random()*300 ;
-            right = Math.random()*300 ;
-            wh = ((Math.random()*400) +100);
-            document.getElementById("shape").style.left = left ;
-            document.getElementById("shape").style.top = top ;
-            document.getElementById("shape").style.width = wh ;
-            document.getElementById("shape").style.height = wh ;
-            document.getElementById("shape").style.display = "block";
-            document.getElementById("shape").style.backgroundColor = getRandomColor();
-            start = new Date().getTime();
-
-        }
-        move();
-            document.getElementById("shape").onclick = function(){
-            document.getElementById("shape").style.display = "none";
-            var end = new Date().getTime();
-            var timetaken = (end - start)/1000 ;
-            alert (timetaken);
-            move();
-        }
+        $("#submitbtn").click(function(){
+            if($("#Email").val() == ""){
+                empty += "</p>Email not filled</p>";
+            }if($("#phoneno").val() == ""){
+                empty += "<p>Phone number not filled</p>";
+            }if($("#password").val() == ""){
+                empty += "<p>password not filled</p>";
+            }if($("#Confirmpassword").val() == ""){
+                empty += "<p>Confirm password not filled</p>";
+            }
+            if(isEmail($("#Email").val()) == false){
+                errorm += "<p> Email is not valid</p>";
+            }if($.isNumeric($("#Phoneno").val()) == false ){
+                errorm += "<p> phone number is not valid</p>";
+            }if ($("#password").val() != $("#Confirmpassword").val()){
+                errorm += "<p> password does not match</p>";
+            }
+            if(errorm == ""){
+                $(".success").html("you are registered");
+            }else {
+                $(".errors").html(empty + errorm);
+            }
+        });
     </script>
 </body>
 </html>

@@ -80,3 +80,45 @@ footer {
     color: rgba(0, 0, 0, 0.5);
     text-align: center;
 }
+.edit-btn,
+.delete-btn {
+    background-color: #bfb1ee;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    font-size: 25px;
+    cursor: pointer;
+}
+.item { 
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 10px; 
+}
+.item form { 
+    display: inline; 
+    margin-left: 10px; 
+}
+.item input[type="text"] { 
+    margin-right: 10px; 
+}
+button {
+    margin-left: 5px; 
+}
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.task-text {
+    flex-grow: 1;
+    margin-left: 10px;
+    font-size: 1.2em;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}

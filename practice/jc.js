@@ -1,4 +1,3 @@
-import superheroes from 'superheroes';
-superheroes;
-import {randomSuperhero} from 'superheroes';
-console.log(randomSuperhero());
+const { default: mongoose } = require("mongoose");
+
+const mongoose = require(mongoose);

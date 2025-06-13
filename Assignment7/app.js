@@ -5,7 +5,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
-let items = [];
+let items = []; 
 
 app.get("/", function (req, res) {
   res.render("list", { ejes: items });

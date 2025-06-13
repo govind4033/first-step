@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import express from "express";
 import bodyParser from "body-parser";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
@@ -10,7 +12,11 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 // Connect to MongoDB
-mongoose.connect("mongodb+srv://govindpatel4033:Askrithe40%40@clusterg.l3yzewq.mongodb.net/todolist")
+const uri = process.env.MONGO_URI;
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
   .then(() => {
     console.log("✅ Connected to MongoDB");
   })
@@ -80,36 +86,3 @@ app.get("/", async function (req, res) {
 app.listen(8000, function () {
   console.log("🚀 Server started on port 8000");
 });
-
-
-// Any CRUD operation
-// async function run() {
-//   try {
-//     // Optional: Clear collection if you want a fresh insert
-//     // await Fruit.deleteMany({});
-
-//     // Insert items
-//     // await Fruit.insertMany([element1,element2,element3])
-//     // .then(()=>{
-//     //     console.log("🍎 Data inserted");
-//     // });
-//     await items.save();
-//     await items.deleteOne();
-    
-
-//     // Fetch and log all items
-//     const fruits = await Fruit.find();
-//     fruits.forEach(num => {
-//       console.log(num.name);
-//     });
-
-//     // await Fruit.updateOne({ name: "banana" }, {rating: 7});
-
-//   } catch (err) {
-//     console.error("❌ Error:", err);
-//   } finally {
-//     mongoose.connection.close(); // Always a good practice
-//   }
-// }
-
-// run();

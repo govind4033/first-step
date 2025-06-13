@@ -13,10 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Connect to MongoDB
 const uri = process.env.MONGO_URI;
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+mongoose.connect(uri)
   .then(() => {
     console.log("✅ Connected to MongoDB");
   })
